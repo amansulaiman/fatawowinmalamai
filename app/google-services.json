@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "999787522105",
+    "firebase_url": "https://fatawowin-malamai.firebaseio.com",
+    "project_id": "fatawowin-malamai",
+    "storage_bucket": "fatawowin-malamai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999787522105:android:aa2432b90d646ea4",
+        "android_client_info": {
+          "package_name": "com.aman.fatawowin.malamai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "999787522105-2a9rjdvmlj1321fmbaueq7u4k30gvpqo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aman.fatawowin.malamai",
+            "certificate_hash": "18BD8B11E9AFA55E7BFEECF4D0D1DF263269614F"
+          }
+        },
+        {
+          "client_id": "999787522105-buumiffptp90tm5lqpaansgsvd4jin8v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS61iUt8CU-1rlQfF50nnHkUhGLQ4BTzU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "999787522105-buumiffptp90tm5lqpaansgsvd4jin8v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

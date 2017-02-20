@@ -1,4 +1,4 @@
-package com.bigscreen.iconictabbardemo;
+package com.bigscreen.fatawowinmalamai;
 
 import org.junit.Test;
 

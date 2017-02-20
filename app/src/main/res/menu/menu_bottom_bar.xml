@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/bottom_chats"
-        android:icon="@drawable/ic_chats"
-        android:title="@string/chats" />
+        android:id="@+id/bottom_malamai"
+        android:icon="@drawable/malamai"
+        android:title="@string/malamai" />
     <item
-        android:id="@+id/bottom_calls"
-        android:icon="@drawable/ic_calls"
-        android:title="@string/calls" />
+        android:id="@+id/bottom_fatawa"
+        android:icon="@drawable/fatawa"
+        android:title="@string/fatawowi" />
     <item
-        android:id="@+id/bottom_contacts"
-        android:icon="@drawable/ic_contacts"
-        android:title="@string/contacts" />
+        android:id="@+id/bottom_zaure"
+        android:icon="@drawable/ic_chart"
+        android:title="@string/zaure" />
     <item
-        android:id="@+id/bottom_settings"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/settings" />
+        android:id="@+id/bottom_azkar"
+        android:icon="@drawable/azkar"
+        android:title="@string/zikirai" />
 </menu>

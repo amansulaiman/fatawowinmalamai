@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.bigscreen.iconictabbardemo.MainActivity">
+    tools:context="com.bigscreen.fatawowinmalamai.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -15,22 +15,12 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="16dp">
-
-        <TextView
-            android:id="@+id/text_demo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/textColor"
-            android:textSize="30sp"
-            android:layout_centerInParent="true"
-            tools:text="Chats" />
-
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+    </FrameLayout>
 
     <com.bigscreen.iconictabbar.view.IconicTabBar
         android:id="@+id/bottom_bar"

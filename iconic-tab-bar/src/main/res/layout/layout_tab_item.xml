@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tab_item"
     android:layout_width="@dimen/iconic_tab_max_width"
-    android:layout_height="?android:attr/actionBarSize"
+    android:layout_height="60dp"
     android:background="?android:attr/selectableItemBackground"
     android:gravity="center"
     android:orientation="vertical">
@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/tab_item_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_gravity="center"
             tools:ignore="ContentDescription"
             tools:src="@drawable/ic_android" />
@@ -43,7 +43,7 @@
         android:maxLines="1"
         android:ellipsize="end"
         android:textColor="@color/defaultColor"
-        android:textSize="14sp"
+        android:textSize="18sp"
         tools:visibility="visible"
         tools:text="Tab" />
 

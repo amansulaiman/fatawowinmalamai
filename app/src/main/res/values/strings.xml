@@ -1,9 +1,92 @@
-<resources>
-    <string name="app_name">IconicTabBar Sample</string>
-    <string name="chats">Chats</string>
-    <string name="calls">Calls</string>
-    <string name="contacts">Contacts</string>
-    <string name="settings">Settings</string>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!--BEGIN APPLICATION STRINGS-->
+    <string name="app_name">Fatawowin Malamai</string>
+    <string name="malamai">Malamai</string>
+    <string name="fatawowi">Fatawowi</string>
+    <string name="zaure">Zaure</string>
+    <string name="zikirai">Zikirai</string>
+    <string name="sign_out">Fitar da Bayanaka</string>
+    <string name="send_button_label">Send</string>
 
-    <string name="text_demo">Hello this is %s screen.</string>
+    <string name="load_end">Na gama ba wani sauran bayani</string>
+    <string name="load_failed">Na kasa dakko ragowar</string>
+    <string name="dakkowa">Ina dakkowa&#8230;</string>
+    <string name="kasawa">Na ka sa dakkowa bayanai!</string>
+    <string name="gamawa">Na gama dakkowa bayanai</string>
+    <!--END APPLICATION STRINGS-->
+
+    <!--BEGIN Firebase Auth UI-->
+    <!-- Common -->
+    <string name="default_toolbar_title">@string/app_name</string>
+    <string name="progress_dialog_loading">Yi haquri kadan ina dakko bayanai…</string>
+    <string name="sign_in_default">Shigar da Bayanaka</string>
+    <string name="general_error">Matsala ta faru yayin aiki.</string>
+    <string name="network_err">Ba ka da network</string>
+    <!-- Provider -->
+    <string name="idp_name_google">Google</string>
+    <string name="idp_name_facebook">Facebook</string>
+    <string name="idp_name_twitter">Twitter</string>
+
+    <!-- Auth method picker -->
+    <string name="sign_in_with_google">Shiga ta hanyar Google</string>
+    <string name="sign_in_with_facebook">Shiga ta hanyar Facebook</string>
+    <string name="sign_in_with_twitter">Sign ta hanyar Twitter</string>
+    <string name="sign_in_with_email">Shiga ta hanyar email</string>
+
+    <!-- Email common-->
+    <string name="next_default">Ci gaba</string>
+    <string name="email_hint">Adreshin Email</string>
+    <string name="password_hint">Kalmar Tsaronka (Password)</string>
+    <string name="required_field">Ba zai yiwu ka bar nan ba komai ba.</string>
+    <string name="invalid_email_address">Wannan email adreshin ba daidai ba ne ba</string>
+    <string name="missing_email_address">Rubuta Email adreshinka domin ka ci gaba</string>
+    <string name="progress_dialog_checking_accounts">Ina dubawa ko akwai mai wannan adershin a cikin na\'ura…</string>
+
+    <!-- Email sign up -->
+    <string name="title_register_email">Yi Ragista da Na\'ura</string>
+    <string name="name_hint">Sunanka da na Mahaifinka</string>
+    <string name="button_text_save">Ajiye</string>
+    <string name="progress_dialog_signing_up">Ina shigar da kai…</string>
+    <plurals name="error_weak_password">
+        <item quantity="one">Lambar tsaroka ba ta da karfi. Yi aiki da mafi karancin %1$d harafai kuma ka cakuda harafan da namba</item>
+        <item quantity="other">Lambar tsaroka ba ta da karfi. Yi aiki da mafi karancin %1$d harafai kuma ka cakuda harafan da namba</item>
+    </plurals>
+    <string name="email_account_creation_error">Ragistar da nake kokarin yi da adershin da ka rubuta ba a samu nasara ba</string>
+    <string name="error_user_collision">Wani ya rigayeka yin ragista da wannan adirshin email da ka rubuta.</string>
+    <string name="create_account_preamble">"Idan ka danna SAve ya nuna ka yadda da dukkanin "</string>
+    <string name="terms_of_service">Ka\'dojin da sharudan yin amfani da wannan Manhaja</string>
+
+    <!-- Idp/Email welcome back -->
+    <string name="title_welcome_back_idp_prompt">@string/sign_in_default</string>
+    <string name="title_welcome_back_password_prompt">@string/sign_in_default</string>
+    <string name="welcome_back_idp_header">Daman can kana da ragista da mu</string>
+    <string name="welcome_back_email_header">Sannunka da dawowa!</string>
+    <string name="welcome_back_idp_prompt">
+        Daman can ka yi aiki da <xliff:g example="jane.doe@example.com" id="email_addr">%1$s</xliff:g>.
+        Shiga ta <xliff:g example="Google" id="provider_name">%2$s</xliff:g> domin ka ci gaba.
+    </string>
+    <string name="welcome_back_password_prompt_body">
+        Daman can ka yi aiki da <xliff:g example="jane.doe@example.com" id="email_addr">%1$s</xliff:g>
+        in kana son shiga. Saka Kalmar tsaronka (Password).
+    </string>
+    <string name="progress_dialog_signing_in">Ina shigar da kai…</string>
+    <string name="trouble_signing_in">Kana da matsala ne a shigarwa?</string>
+
+    <!-- Password recovery -->
+    <string name="title_recover_password_activity">Na manta Kalmar tsarona (Password)</string>
+    <string name="title_confirm_recover_password">Duba adreshinka na email</string>
+    <string name="password_recovery_body">Zan tura maka bayanai kan yadda za ka dawo da Lambar tsaronka zuwa adreshin email dinka.</string>
+    <string name="button_text_send">Tura</string>
+    <string name="confirm_recovery_body">Ka bi umarnin da aka tura maka a %1$s domin dawo da Kalmar tsaronka (Password).</string>
+    <string name="progress_dialog_sending">Ina turawa…</string>
+    <string name="error_email_does_not_exist">Wanna adreshin email din bai da ce da kowanne adreshi ba a cikin na\'urarmu</string>
+
+    <!-- accessibility -->
+    <string name="accessibility_logo">App logo</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_fatawa_detail">FatawaDetailActivity</string>
+
+    <!--END Firebase Auth UI-->
 </resources>
