@@ -48,6 +48,9 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     compile 'com.evernote:android-state:1.0.3'
+    compile 'io.github.jeancsanchez.jcplayer:jcplayer:2.6.0-alpha'
+
     annotationProcessor 'com.evernote:android-state-processor:1.0.3'
+
 }
 apply plugin: 'com.google.gms.google-services'
