@@ -51,9 +51,10 @@ public class FatawowiAdapter extends BaseQuickAdapter<Fatawa, BaseViewHolder> {
     protected void convert(BaseViewHolder helper, final Fatawa item) {
         //helper.addOnClickListener(R.id.tweetName);
         //helper.addOnClickListener(R.id.tweetText);
+        String intro = item.getJawabinTambaya().substring(0, Math.min(item.getJawabinTambaya().length(), 60));
         helper.setText(R.id.tweetName , item.getSunanTambaya());
-        String msg="\""+item.getJawabinTambaya()+"\"... ";
-        ( (TextView)helper.getView(R.id.tweetText)).setText(SpannableStringUtils.getBuilder(msg).append("Malam Aminu Daurawa").setClickSpan(clickableSpan).create());
+        String msg="\""+intro+"\"... ";
+        ( (TextView)helper.getView(R.id.tweetText)).setText(SpannableStringUtils.getBuilder(msg).append(item.getSunanMalami()).setClickSpan(clickableSpan).create());
         ( (TextView)helper.getView(R.id.tweetText)).setMovementMethod(LinkMovementMethod.getInstance());
         helper.setText(R.id.tweetDate, item.getLokacinTambaya().toString());
         //helper.linkify(R.id.tweetName);

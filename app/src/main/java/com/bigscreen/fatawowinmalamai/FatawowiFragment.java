@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -141,7 +142,8 @@ public class FatawowiFragment extends Fragment implements BaseQuickAdapter.Reque
             @Override
             public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
                 Intent detailFatwa = new Intent(getActivity().getApplicationContext(), FatawaDetailActivity.class);
-
+                Fatawa selected = mFatawowiAdapter.getItem(position);
+                detailFatwa.putExtra("Fatawa", selected);
                 startActivity(detailFatwa);
             }
         });
@@ -155,6 +157,18 @@ public class FatawowiFragment extends Fragment implements BaseQuickAdapter.Reque
 //        if (mMessageDatabaseReference.getRef() == null)
 //        {
             //TODO: Initialize Data
+//        for (int i = 0; i < 10; i++) {
+//            Fatawa fatawa = new Fatawa();
+//            fatawa.setSunanMalami("Mal. Ibrahim Khalil");
+//            fatawa.setAnYijawabi(true);
+//            fatawa.setJawabinMalami("Ya halatta yin amfani da yanar gizo gizo don samun bayanai na addini da na rayuwa musamman idan an yi kyaykyar amfani da ita wannan kafar");
+//            fatawa.setJawabinTambaya("Malam me ne hukuncin yin amfani da internet don karartun addini");
+//            fatawa.setLokacinTambaya(new Date());
+//            fatawa.setMaiTambaya("Abdulrahman Sulaiman");
+//            fatawa.setSunanTambaya("Hukuncin yin amfani da Internet");
+//            mMessageDatabaseReference.push().setValue(fatawa);
+//
+//        }
 
         //}
         //attach data
@@ -167,28 +181,30 @@ public class FatawowiFragment extends Fragment implements BaseQuickAdapter.Reque
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Fatawa fatawa = dataSnapshot.getValue(Fatawa.class);
-
                     mFatawowiAdapter.addData(fatawa);
+                    onLoadMoreRequested();
                 }
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                    //onRefresh();
                 }
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                    //onRefresh();
                 }
 
                 @Override
                 public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
+                    //onRefresh();
                 }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
 
                 }
+
             };
             mMessageDatabaseReference.orderByValue().addChildEventListener(mChildEventLister);
         }
@@ -309,7 +325,9 @@ public class FatawowiFragment extends Fragment implements BaseQuickAdapter.Reque
                 } else {
                     mFatawowiAdapter.loadMoreEnd();//default visible
                     mFatawowiAdapter.loadMoreEnd(mLoadMoreEndGone);//true is gone,false is visible
+                    //mFatawowiAdapter.loadMoreComplete();
                     mSwipeRefreshLayout.setEnabled(true);
+
                 }
             }
 

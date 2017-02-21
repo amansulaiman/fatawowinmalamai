@@ -1,9 +1,7 @@
 package com.bigscreen.fatawowinmalamai;
 
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +16,7 @@ import com.bigscreen.iconictabbar.view.IconicTab;
 import com.bigscreen.iconictabbar.view.IconicTabBar;
 import com.evernote.android.state.StateSaver;
 
-public class MainActivity extends AppCompatActivity implements FatawowiFragment.OnFragmentInteractionListener,  ZaureFragment.OnFragmentInteractionListener, ZikiraiFragment.OnFragmentInteractionListener, MalamaiFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements FatawowiFragment.OnFragmentInteractionListener,  ShiriFragment.OnFragmentInteractionListener, MalamaiFragment.OnFragmentInteractionListener{
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public static  int currentItemSelected = 0;
@@ -26,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
     private IconicTabBar iconicTabBar;
     private IconicTabBar.OnTabSelectedListener tabListener;
     private static final String FRAGMENT_KEY = "CurrentFragemnt";
-    private Fragment mFragement;
+    public static Fragment mFragement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +41,6 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
             // then we don't need to do anything and should return or else
             // we could end up with overlapping fragments.
             if (savedInstanceState != null) {
-                //getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mFragement).commit();
-                mFragement = getSupportFragmentManager().getFragment(savedInstanceState, FRAGMENT_KEY);
                 return;
             }
 
@@ -61,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
 
             mFragement = firstFragment;
         }
-        initToolbar();
+        //initToolbar();
         //initViews();
     }
 
@@ -104,31 +100,19 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
                         mFragement = fatawaFragment;
                         break;
                     case R.id.bottom_zaure:
-                        ZaureFragment zaureFragment = new ZaureFragment();
+                        ShiriFragment shiriFragment = new ShiriFragment();
                         FragmentTransaction zaureTransaction = getSupportFragmentManager().beginTransaction();
                         // Replace whatever is in the fragment_container view with this fragment,
                         // and add the transaction to the back stack so the user can navigate back
-                        zaureTransaction.replace(R.id.fragment_container, zaureFragment);
+                        zaureTransaction.replace(R.id.fragment_container, shiriFragment);
                         //zaureTransaction.addToBackStack(null);
                         currentItemSelected = 2;
                         // Commit the transaction
                         zaureTransaction.commit();
                         //Save Fragement
-                        mFragement = zaureFragment;
+                        mFragement = shiriFragment;
                         break;
-                    case R.id.bottom_azkar:
-                        ZikiraiFragment zikiraiFragment = new ZikiraiFragment();
-                        FragmentTransaction zikiraiTransaction = getSupportFragmentManager().beginTransaction();
-                        // Replace whatever is in the fragment_container view with this fragment,
-                        // and add the transaction to the back stack so the user can navigate back
-                        zikiraiTransaction.replace(R.id.fragment_container, zikiraiFragment);
-                        //zikiraiTransaction.addToBackStack(null);
-                        currentItemSelected = 3;
-                        // Commit the transaction
-                        zikiraiTransaction.commit();
-                        //Save Fragement
-                        mFragement = zikiraiFragment;
-                        break;
+
                     default:
                         break;
                 }
@@ -140,22 +124,76 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
             }
         };
         iconicTabBar = (IconicTabBar) findViewById(R.id.bottom_bar);
+
         switch (currentItemSelected)
         {
             case 0:
                 iconicTabBar.setSelectedTab(0);
+                if (mFragement == null)
+                {
+                    MalamaiFragment malamai = new MalamaiFragment();
+                    FragmentTransaction malamaiTransaction = getSupportFragmentManager().beginTransaction();
+                    // Replace whatever is in the fragment_container view with this fragment,
+                    // and add the transaction to the back stack so the user can navigate back
+                    malamaiTransaction.replace(R.id.fragment_container, malamai);
+                    //malamaiTransaction.addToBackStack(null);
+                    currentItemSelected = 0;
+                    // Commit the transaction
+                    malamaiTransaction.commit();
+                    //Save Fragement
+                    mFragement = malamai;
+                }
                 break;
             case 1:
                 iconicTabBar.setSelectedTab(1);
+                if (mFragement == null)
+                {
+                    FatawowiFragment fatawaFragment = new FatawowiFragment();
+                    FragmentTransaction fatawaTransaction = getSupportFragmentManager().beginTransaction();
+                    // Replace whatever is in the fragment_container view with this fragment,
+                    // and add the transaction to the back stack so the user can navigate back
+                    fatawaTransaction.replace(R.id.fragment_container, fatawaFragment);
+                    //fatawaTransaction.addToBackStack(null);
+                    currentItemSelected = 1;
+                    // Commit the transaction
+                    fatawaTransaction.commit();
+                    //Save Fragement
+                    mFragement = fatawaFragment;
+                }
                 break;
             case 2:
                 iconicTabBar.setSelectedTab(2);
-                break;
-            case 3:
-                iconicTabBar.setSelectedTab(3);
+                if (mFragement == null)
+                {
+                    ShiriFragment shiriFragment = new ShiriFragment();
+                    FragmentTransaction zaureTransaction = getSupportFragmentManager().beginTransaction();
+                    // Replace whatever is in the fragment_container view with this fragment,
+                    // and add the transaction to the back stack so the user can navigate back
+                    zaureTransaction.replace(R.id.fragment_container, shiriFragment);
+                    //zaureTransaction.addToBackStack(null);
+                    currentItemSelected = 2;
+                    // Commit the transaction
+                    zaureTransaction.commit();
+                    //Save Fragement
+                    mFragement = shiriFragment;
+                }
                 break;
             default:
                 iconicTabBar.setSelectedTab(0);
+                if (mFragement == null)
+                {
+                    MalamaiFragment malamai = new MalamaiFragment();
+                    FragmentTransaction malamaiTransaction = getSupportFragmentManager().beginTransaction();
+                    // Replace whatever is in the fragment_container view with this fragment,
+                    // and add the transaction to the back stack so the user can navigate back
+                    malamaiTransaction.replace(R.id.fragment_container, malamai);
+                    //malamaiTransaction.addToBackStack(null);
+                    currentItemSelected = 0;
+                    // Commit the transaction
+                    malamaiTransaction.commit();
+                    //Save Fragement
+                    mFragement = malamai;
+                }
                 break;
         }
         iconicTabBar.setOnTabSelectedListener(tabListener);
@@ -174,15 +212,13 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
         detachedView();
     }
 
-    private void detachedTool() {
-        setSupportActionBar(null);
-        toolbar.removeAllViews();
-    }
+
 
     @Override
     protected void onResume() {
         super.onResume();
         initViews();
+        initToolbar();
     }
 
     private void detachedView() {
@@ -216,5 +252,10 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
         // etc.
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        currentItemSelected = 0;
+        mFragement = null;
+    }
 }

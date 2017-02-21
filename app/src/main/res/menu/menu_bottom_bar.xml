@@ -10,10 +10,10 @@
         android:title="@string/fatawowi" />
     <item
         android:id="@+id/bottom_zaure"
-        android:icon="@drawable/ic_chart"
-        android:title="@string/zaure" />
-    <item
-        android:id="@+id/bottom_azkar"
-        android:icon="@drawable/azkar"
-        android:title="@string/zikirai" />
+        android:icon="@drawable/shirye"
+        android:title="@string/sauraro" />
+    <!--<item-->
+        <!--android:id="@+id/bottom_azkar"-->
+        <!--android:icon="@drawable/azkar"-->
+        <!--android:title="@string/zikirai" />-->
 </menu>
