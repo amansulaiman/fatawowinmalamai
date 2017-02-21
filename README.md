@@ -5,6 +5,7 @@
 [![Twitter](https://img.shields.io/badge/Twitter-@amansulaiman92-blue.svg?style=flat)](http://twitter.com/amansulaiman92)
 
 Fatawowin Malamai manhaja ce ta wayar hannu ta Android da aka kirkira domin hausawa mazauna garuruwa daban daban da suke neman fatawa sahihiya daga wajen sahihan malamai.
+https://github.com/amansulaiman/fatawowinmalamai/blob/master/Screenshot_2017-02-21-08-17-25.png
 
 Yadda za ayi amfani
 -----
