@@ -1,7 +1,9 @@
 package com.bigscreen.fatawowinmalamai;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,18 @@ import android.widget.Toast;
 import com.bigscreen.iconictabbar.view.IconicTab;
 import com.bigscreen.iconictabbar.view.IconicTabBar;
 import com.evernote.android.state.StateSaver;
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Arrays;
+
+import static com.bigscreen.fatawowinmalamai.FatawowiFragment.calledAlready;
 
 public class MainActivity extends AppCompatActivity implements FatawowiFragment.OnFragmentInteractionListener,  ShiriFragment.OnFragmentInteractionListener, MalamaiFragment.OnFragmentInteractionListener{
 
@@ -26,13 +40,64 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
     private static final String FRAGMENT_KEY = "CurrentFragemnt";
     public static Fragment mFragement;
 
+    private String mUsername;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
+    private Menu menu;
+    public static final String ANONYMOUS = "Wani Mutum ne";
+    private String menuText;
+    private DatabaseReference connectedRef;
+    boolean connected;
+    ValueEventListener connectListner;
+    private static final int RC_SIGN_IN = 3;
+    public static FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StateSaver.restoreInstanceState(this, savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+        mUsername = ANONYMOUS;
+        if (!calledAlready)
+        {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+            calledAlready = true;
+        }
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
 
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser mUser = firebaseAuth.getCurrentUser();
+
+                if (mUser != null)
+                {
+                    //User signedIn
+                    user = mUser;
+                    onSingnedInInitialized(mUser.getDisplayName());
+                }
+                else
+                {
+                    //User singedOut
+                    user = null;
+                    onSingnedOutInitialized();
+                }
+            }
+        };
+        connectListner = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                connected = dataSnapshot.getValue(Boolean.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        };
         // Check that the activity is using the layout version with
         // the fragment_container FrameLayout
         if (findViewById(R.id.fragment_container) != null) {
@@ -203,6 +268,9 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_top, menu);
+        this.menu = menu;
+        MenuItem m = menu.findItem(R.id.sign_out_menu);
+        m.setTitle(menuText);
         return true;
     }
 
@@ -210,6 +278,13 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
     protected void onPause() {
         super.onPause();
         detachedView();
+        if (connectListner != null)
+        {
+            connectedRef.removeEventListener(connectListner);
+        }
+        if (mAuthStateListener != null) {
+            mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+        }
     }
 
 
@@ -219,6 +294,8 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
         super.onResume();
         initViews();
         initToolbar();
+        connectedRef.addValueEventListener(connectListner);
+        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
 
     private void detachedView() {
@@ -232,7 +309,42 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
         {
             case R.id.sign_out_menu:
                 //sign out
-                Toast.makeText(this, "Zan fitar da kai nan ba da dadewa ba", Toast.LENGTH_SHORT).show();
+                if (item.getTitle() == getString(R.string.sign_out))
+                {
+                    if (connected)
+                    {
+                        AuthUI.getInstance().signOut(this);
+                    }else {
+                        Toast.makeText(this, "Ba ka da intenet, amma na fitar da bayanka ", Toast.LENGTH_SHORT).show();
+                        AuthUI.getInstance().signOut(this);
+                    }
+
+                    item.setTitle(R.string.sign_in);
+                }else
+                {
+                    //TODO Login
+                    if (connected)
+                    {
+                        startActivityForResult(
+                                AuthUI.getInstance()
+                                        .createSignInIntentBuilder()
+                                        .setIsSmartLockEnabled(false)
+                                        .setProviders(Arrays.asList(
+                                                new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                                                new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
+                                                new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build()))
+                                        .setTheme(R.style.GreenTheme)
+                                        .setLogo(R.mipmap.ic_launcher)
+
+                                        .build(),
+                                RC_SIGN_IN);
+                    }
+                    else
+                    {
+                        Toast.makeText(this, "Ba ka da intenet, ka kunna datarka don na samu in shigar da bayanka ", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
                 return  true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -257,5 +369,41 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
         super.onBackPressed();
         currentItemSelected = 0;
         mFragement = null;
+    }
+
+    private void onSingnedInInitialized(String userName) {
+
+        mUsername = userName;
+        menuText = getString(R.string.sign_out);
+        if (menu != null)
+        {
+            MenuItem m = menu.findItem(R.id.sign_out_menu);
+            m.setTitle(menuText);
+        }
+    }
+
+    private void onSingnedOutInitialized() {
+        mUsername = ANONYMOUS;
+        menuText = getString(R.string.sign_in);
+        if (menu != null)
+        {
+            MenuItem m = menu.findItem(R.id.sign_out_menu);
+            m.setTitle(menuText);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN)
+        {
+            if (resultCode == RESULT_OK)
+            {
+                Toast.makeText(this, "Na kammala shigar da baynanka", Toast.LENGTH_SHORT).show();
+            }else  if (resultCode == RESULT_CANCELED)
+            {
+                Toast.makeText(this, "Ka dakatar da shigarwa", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

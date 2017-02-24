@@ -15,16 +15,19 @@ import com.bigscreen.fatawowinmalamai.util.Utils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by aman on 2/16/17.
  */
 
-public class FatawowiAdapter extends BaseQuickAdapter<Fatawa, BaseViewHolder> {
+public class FatawowiAdapter extends CustomBaseQuickAdapter<Fatawa, BaseViewHolder> {
 
 
-    public FatawowiAdapter(int layoutResId, List<Fatawa> data) {
+    public FatawowiAdapter(int layoutResId, LinkedList<Fatawa> data) {
         super(layoutResId, data);
     }
 
@@ -51,14 +54,19 @@ public class FatawowiAdapter extends BaseQuickAdapter<Fatawa, BaseViewHolder> {
     protected void convert(BaseViewHolder helper, final Fatawa item) {
         //helper.addOnClickListener(R.id.tweetName);
         //helper.addOnClickListener(R.id.tweetText);
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
+        String date = format.format(item.getLokacinTambaya());
         String intro = item.getJawabinTambaya().substring(0, Math.min(item.getJawabinTambaya().length(), 60));
         helper.setText(R.id.tweetName , item.getSunanTambaya());
         String msg="\""+intro+"\"... ";
         ( (TextView)helper.getView(R.id.tweetText)).setText(SpannableStringUtils.getBuilder(msg).append(item.getSunanMalami()).setClickSpan(clickableSpan).create());
         ( (TextView)helper.getView(R.id.tweetText)).setMovementMethod(LinkMovementMethod.getInstance());
-        helper.setText(R.id.tweetDate, item.getLokacinTambaya().toString());
+        helper.setText(R.id.tweetDate, date);
         //helper.linkify(R.id.tweetName);
     }
 
-
+    @Override
+    public void addData(Fatawa data) {
+        super.addData(data);
+    }
 }

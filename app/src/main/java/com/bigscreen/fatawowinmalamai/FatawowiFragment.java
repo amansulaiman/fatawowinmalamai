@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -14,28 +15,37 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigscreen.fatawowinmalamai.Adapters.CustomBaseQuickAdapter;
+import com.bigscreen.fatawowinmalamai.Adapters.CustomOnItemClickListerner;
 import com.bigscreen.fatawowinmalamai.Adapters.FatawowiAdapter;
 import com.bigscreen.fatawowinmalamai.DummyData.DataServer;
 import com.bigscreen.fatawowinmalamai.Entities.Fatawa;
 import com.bigscreen.fatawowinmalamai.loadmore.CustomLoadMore;
 import com.bigscreen.fatawowinmalamai.util.Utils;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
@@ -48,24 +58,18 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
  * Use the {@link FatawowiFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FatawowiFragment extends Fragment implements BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener{
+public class FatawowiFragment extends Fragment implements CustomBaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener{
     private RecyclerView mRecyclerView;
     private FatawowiAdapter mFatawowiAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessageDatabaseReference;
     private ChildEventListener mChildEventLister;
-    private String mUsername;
 
     static boolean calledAlready = false;
 
-    private static final int TOTAL_COUNTER = 18;
-
-    private static final int PAGE_SIZE = 6;
-
     private int delayMillis = 1000;
 
-    private int mCurrentCounter = 0;
 
     private boolean isErr;
     private boolean mLoadMoreEndGone = false;
@@ -112,6 +116,7 @@ public class FatawowiFragment extends Fragment implements BaseQuickAdapter.Reque
 
     }
 
+
     private void addHeadView() {
         View headView = getActivity().getLayoutInflater().inflate(R.layout.head_view, (ViewGroup) mRecyclerView.getParent(), false);
         headView.findViewById(R.id.iv).setVisibility(View.GONE);
@@ -122,25 +127,24 @@ public class FatawowiFragment extends Fragment implements BaseQuickAdapter.Reque
                 mLoadMoreEndGone = true;
                 mFatawowiAdapter.setLoadMoreView(new CustomLoadMore());
                 mRecyclerView.setAdapter(mFatawowiAdapter);
-                Toast.makeText(getActivity(), "change complete", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Duba Fatawoin Malamai", Toast.LENGTH_LONG).show();
             }
         });
         mFatawowiAdapter.addHeaderView(headView);
     }
 
     private void initAdapter() {
-        final List<Fatawa> fatawowi = new ArrayList<>();
+        final LinkedList<Fatawa> fatawowi = new LinkedList<>();
         mFatawowiAdapter = new FatawowiAdapter( R.layout.layout_animation, fatawowi);
         mFatawowiAdapter.setLoadMoreView(new CustomLoadMore());
         mFatawowiAdapter.setOnLoadMoreListener(this);
-        mFatawowiAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mFatawowiAdapter.openLoadAnimation(CustomBaseQuickAdapter.SLIDEIN_LEFT);
         //pullToRefreshAdapter.setAutoLoadMoreSize(3);
         mRecyclerView.setAdapter(mFatawowiAdapter);
-        mCurrentCounter = mFatawowiAdapter.getData().size();
 
-        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
+        mRecyclerView.addOnItemTouchListener(new CustomOnItemClickListerner() {
             @Override
-            public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
+            public void onSimpleItemClick(CustomBaseQuickAdapter adapter, View view, int position) {
                 Intent detailFatwa = new Intent(getActivity().getApplicationContext(), FatawaDetailActivity.class);
                 Fatawa selected = mFatawowiAdapter.getItem(position);
                 detailFatwa.putExtra("Fatawa", selected);
@@ -205,6 +209,10 @@ public class FatawowiFragment extends Fragment implements BaseQuickAdapter.Reque
 
                 }
 
+                @Override
+                protected void finalize() throws Throwable {
+                    super.finalize();
+                }
             };
             mMessageDatabaseReference.orderByValue().addChildEventListener(mChildEventLister);
         }
@@ -241,10 +249,19 @@ public class FatawowiFragment extends Fragment implements BaseQuickAdapter.Reque
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (MainActivity.user == null)
+                {
+                    Snackbar.make(view, "Kayi haquri ina bukatar ka shigar da bayanaka", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }else
+                {
+                    Intent detailFatwa = new Intent(getActivity().getApplicationContext(), SendFatawaActivity.class);
+                    startActivity(detailFatwa);
+                }
+
             }
         });
+
 
         Utils.init(getActivity());
         initAdapter();
@@ -280,18 +297,19 @@ public class FatawowiFragment extends Fragment implements BaseQuickAdapter.Reque
     }
 
 
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        detachedDatabaseListener();
-//        mFatawowiAdapter = null;
-//    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        //detachedDatabaseListener();
+        //mFatawowiAdapter = null;
+
+    }
 //
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        attacheDatabaseListner();
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        //attacheDatabaseListner();
+    }
 
 
     @Override
@@ -301,11 +319,10 @@ public class FatawowiFragment extends Fragment implements BaseQuickAdapter.Reque
             @Override
             public void run() {
                 detachedDatabaseListener();
-                List<Fatawa> fatawaList = new ArrayList<Fatawa>();
+                LinkedList<Fatawa> fatawaList = new LinkedList<Fatawa>();
                 mFatawowiAdapter.setNewData(fatawaList);
                 attacheDatabaseListner();
                 isErr = false;
-                mCurrentCounter = mFatawowiAdapter.getData().size();
                 mSwipeRefreshLayout.setRefreshing(false);
                 mFatawowiAdapter.setEnableLoadMore(true);
             }
@@ -349,4 +366,5 @@ public class FatawowiFragment extends Fragment implements BaseQuickAdapter.Reque
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

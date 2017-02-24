@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_send_fatawa"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.bigscreen.fatawowinmalamai.SendFatawaActivityFragment"
+    tools:showIn="@layout/activity_send_fatawa"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rSunaLabel"
+            android:layout_weight="0"
+            android:textSize="18sp"
+            android:textStyle="normal|bold" />
+        <EditText
+            android:id="@+id/sunanMaiTambaya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Rubuta Sunanka"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rTambayalabel"
+            android:layout_weight="0"
+            android:textSize="18sp"
+            android:textStyle="normal|bold" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gundarinTambaya"
+            android:hint="Gundarin Tambaya"
+            android:layout_weight="1"
+            android:inputType="textEmailSubject" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/malamaiLabel"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:gravity="center"/>
+        <Spinner
+            android:id="@+id/malamaiList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            style="@style/tweetName"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/bayaninTambaya"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Rubuta cikakken Bayani akan tambayarka"
+            />
+    </LinearLayout>
+
+
+
+</LinearLayout>

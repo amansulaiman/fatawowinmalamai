@@ -45,7 +45,8 @@ dependencies {
     compile 'com.google.firebase:firebase-storage:10.0.1'
     //Firebase Messaging Notification
     compile 'com.google.firebase:firebase-messaging:10.0.1'
-
+    // Firebase App Indexing
+    compile 'com.google.firebase:firebase-appindexing:10.0.1'
     testCompile 'junit:junit:4.12'
     compile 'com.evernote:android-state:1.0.3'
     compile 'io.github.jeancsanchez.jcplayer:jcplayer:2.6.0-alpha'

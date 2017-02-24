@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bigscreen.fatawowinmalamai.Entities.Fatawa;
 import com.bigscreen.fatawowinmalamai.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FatawaDetailActivity extends AppCompatActivity {
@@ -30,7 +31,8 @@ public class FatawaDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         currentFatawa = (Fatawa) getIntent().getExtras().getSerializable("Fatawa");
-
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
+        String date = format.format(currentFatawa.getLokacinTambaya());
         jawabinMalami = (TextView) findViewById(R.id.jawabinMalami);
         jawabinTambaya = (TextView) findViewById(R.id.jawabinTambaya);
         sunanTambaya = (TextView) findViewById(R.id.sunanTambaya);
@@ -40,7 +42,7 @@ public class FatawaDetailActivity extends AppCompatActivity {
         jawabinMalami.setText(currentFatawa.getJawabinMalami());
         jawabinTambaya.setText(currentFatawa.getJawabinTambaya());
         sunanTambaya.setText(currentFatawa.getSunanTambaya());
-        lokacinTambaya.setText(currentFatawa.getLokacinTambaya().toString());
+        lokacinTambaya.setText(date);
         sunanMalami.setText(currentFatawa.getSunanMalami());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
