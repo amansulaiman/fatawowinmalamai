@@ -210,20 +210,21 @@ public class IconicTabBar extends FrameLayout implements IconicTab.OnTabClickLis
         int tabCount = tabs.size();
         int screenWidth = ConfigHelper.getScreenWidth(getContext());
         int tabMaxWidth = ConfigHelper.getPxFromDimenRes(R.dimen.iconic_tab_max_width, getContext());
-        if ((tabMaxWidth * tabCount) > screenWidth) {
-            llTabs.setLayoutParams(new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-            for (IconicTab tab : tabs) {
-                tab.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1f));
-                tab.setGravity(Gravity.CENTER);
-            }
-        } else {
-            llTabs.setLayoutParams(new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT,
-                    Gravity.CENTER_HORIZONTAL));
-            for (IconicTab tab : tabs) {
-                tab.setLayoutParams(new LinearLayout.LayoutParams(tabMaxWidth, LayoutParams.MATCH_PARENT));
-                tab.setGravity(Gravity.CENTER);
-            }
+        llTabs.setLayoutParams(new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        for (IconicTab tab : tabs) {
+            tab.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1f));
+            tab.setGravity(Gravity.CENTER);
         }
+//        if ((tabMaxWidth * tabCount) > screenWidth) {
+//
+//        } else {
+//            llTabs.setLayoutParams(new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT,
+//                    Gravity.CENTER_HORIZONTAL));
+//            for (IconicTab tab : tabs) {
+//                tab.setLayoutParams(new LinearLayout.LayoutParams(tabMaxWidth, LayoutParams.MATCH_PARENT));
+//                tab.setGravity(Gravity.CENTER);
+//            }
+//        }
     }
 
     public interface OnTabSelectedListener {

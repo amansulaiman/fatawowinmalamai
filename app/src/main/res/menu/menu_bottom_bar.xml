@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/bottom_malamai"
-        android:icon="@drawable/malamai"
-        android:title="@string/malamai" />
+        android:icon="@drawable/matashiya"
+        android:title="@string/matashiya" />
     <item
         android:id="@+id/bottom_fatawa"
         android:icon="@drawable/fatawa"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.bigscreen.fatawowinmalamai">
+    package="com.aman.fatawowin.malamai">
 
     <application
         android:allowBackup="true"
@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:replace="allowBackup,supportsRtl">
         <activity
-            android:name=".MainActivity"
+            android:name="com.aman.fatawowin.malamai.MainActivity"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,11 +20,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FatawaDetailActivity"
+            android:name="com.aman.fatawowin.malamai.FatawaDetailActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_fatawa_detail" />
         <activity
-            android:name=".SendFatawaActivity"
+            android:name="com.aman.fatawowin.malamai.SendFatawaActivity"
             android:label="@string/title_activity_send_fatawa"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="orientation|screenSize">
