@@ -1,15 +1,15 @@
-# Fatawowin Malamai
+# Guzirin Malamai
 
 [![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
 [![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)
 [![Twitter](https://img.shields.io/badge/Twitter-@amansulaiman92-blue.svg?style=flat)](http://twitter.com/amansulaiman92)
 
-Fatawowin Malamai manhaja ce ta wayar hannu ta Android da aka kirkira domin hausawa mazauna garuruwa daban daban da suke neman fatawa sahihiya daga wajen sahihan malamai.
+Guzirin Malamai manhaja ce ta wayar hannu ta Android da aka kirkira domin hausawa mazauna garuruwa daban daban da suke neman fatawa sahihiya daga wajen sahihan littattafai da malamai.
 ![alt tag](https://github.com/amansulaiman/fatawowinmalamai/blob/master/Screenshot_2017-02-21-08-17-25.png)
 
 Yadda za ayi amfani
 -----
-* Aje a dakko Android Studion 2.2 [anan] (https://developer.android.com/studio/index.html).
+* Aje a dakko Android Studion 2.3 [anan] (https://developer.android.com/studio/index.html).
 * Ka tabbata Naurarar tattara codes dinka itace Gradle 2.14
 
 
