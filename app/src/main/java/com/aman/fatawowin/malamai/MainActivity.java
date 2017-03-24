@@ -1,8 +1,10 @@
 package com.aman.fatawowin.malamai;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,7 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
-
+import com.aman.fatawowin.malamai.Slides.Gabatarwa;
 import com.bigscreen.iconictabbar.view.IconicTab;
 import com.bigscreen.iconictabbar.view.IconicTabBar;
 import com.firebase.ui.auth.AuthUI;
@@ -24,7 +26,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements FatawowiFragment.OnFragmentInteractionListener,  ShiriFragment.OnFragmentInteractionListener, MatashiyaFragment.OnFragmentInteractionListener{
@@ -36,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
     private IconicTabBar.OnTabSelectedListener tabListener;
     private static final String FRAGMENT_KEY = "CurrentFragemnt";
     public static Fragment mFragement;
-
     private String mUsername;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+
+
 
         mUsername = ANONYMOUS;
         if (!FatawowiFragment.calledAlready)
@@ -95,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
             }
 
         };
+
         // Check that the activity is using the layout version with
         // the fragment_container FrameLayout
         if (findViewById(R.id.fragment_container) != null) {
@@ -217,9 +220,9 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
                     fatawaTransaction.replace(R.id.fragment_container, fatawaFragment);
                     //fatawaTransaction.addToBackStack(null);
                     currentItemSelected = 1;
-                    // Commit the transaction
+                    //Commit the transaction
                     fatawaTransaction.commit();
-                    //Save Fragement
+                    //Save and Fragment
                     mFragement = fatawaFragment;
                 }
                 break;
@@ -236,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
                     currentItemSelected = 2;
                     // Commit the transaction
                     zaureTransaction.commit();
-                    //Save Fragement
+                    //Save November
                     mFragement = shiriFragment;
                 }
                 break;
@@ -293,6 +296,39 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
         initToolbar();
         connectedRef.addValueEventListener(connectListner);
         mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+
+        //  Declare a new thread to do a preference check
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //  Initialize SharedPreferences
+                SharedPreferences getPrefs = PreferenceManager
+                        .getDefaultSharedPreferences(getBaseContext());
+
+                //  Create a new boolean and preference and set it to true
+                boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
+
+                //  If the activity has never started before...
+                if (isFirstStart) {
+
+                    //  Launch app intro
+                    Intent i = new Intent(MainActivity.this, Gabatarwa.class);
+                    startActivity(i);
+
+                    //  Make a new preferences editor
+                    SharedPreferences.Editor e = getPrefs.edit();
+
+                    //  Edit preference to make it false because we don't want this to run again
+                    e.putBoolean("firstStart", false);
+
+                    //  Apply changes
+                    e.apply();
+                }
+            }
+        });
+
+        // Start the thread
+        t.start();
     }
 
     private void detachedView() {

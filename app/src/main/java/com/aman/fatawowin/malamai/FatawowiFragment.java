@@ -36,6 +36,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import static android.app.Activity.RESULT_CANCELED;
@@ -51,6 +52,8 @@ import static android.app.Activity.RESULT_OK;
  */
 public class FatawowiFragment extends Fragment implements CustomBaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener{
     private RecyclerView mRecyclerView;
+    private LinkedList<FatawaData> fatawowi;
+    //private HashMap<String, FatawaData> cFatafatawowiwowiList;
     private FatawowiAdapter mFatawowiAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private FirebaseDatabase mFirebaseDatabase;
@@ -123,7 +126,7 @@ public class FatawowiFragment extends Fragment implements CustomBaseQuickAdapter
     }
 
     private void initAdapter() {
-        final LinkedList<FatawaData> fatawowi = new LinkedList<>();
+        fatawowi = new LinkedList<>();
         mFatawowiAdapter = new FatawowiAdapter( R.layout.layout_animation, fatawowi);
         mFatawowiAdapter.setLoadMoreView(new CustomLoadMore());
         mFatawowiAdapter.setOnLoadMoreListener(this);
@@ -176,9 +179,9 @@ public class FatawowiFragment extends Fragment implements CustomBaseQuickAdapter
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Fatawa fatawa = dataSnapshot.getValue(Fatawa.class);
                     String key = dataSnapshot.getKey();
-                    Log.w(s, key);
+                    //Log.w(s, key);
                     FatawaData fatawaData = new FatawaData(fatawa.isAnYijawabi(),fatawa.getJawabinMalami(), fatawa.getSunanTambaya(), fatawa.getJawabinTambaya(), fatawa.getMaiTambaya(), fatawa.getLokacinTambaya(), fatawa.getSunanMalami(), fatawa.getMalamiID(), key);
-                    mFatawowiAdapter.addData(fatawaData);
+                    fatawowi.addFirst(fatawaData);
                     mFatawowiAdapter.notifyDataSetChanged();
                     onLoadMoreRequested();
                 }
@@ -186,11 +189,28 @@ public class FatawowiFragment extends Fragment implements CustomBaseQuickAdapter
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                     //onRefresh();
+                    Integer fatawaListPisition = getFataIndex(dataSnapshot.getKey());
+                    if (fatawaListPisition != null)
+                    {
+                        Fatawa fatawa = dataSnapshot.getValue(Fatawa.class);
+                        String key = dataSnapshot.getKey();
+                        //Log.w(s, key);
+                        FatawaData fatawaData = new FatawaData(fatawa.isAnYijawabi(),fatawa.getJawabinMalami(), fatawa.getSunanTambaya(), fatawa.getJawabinTambaya(), fatawa.getMaiTambaya(), fatawa.getLokacinTambaya(), fatawa.getSunanMalami(), fatawa.getMalamiID(), key);
+                        fatawowi.set(fatawaListPisition, fatawaData);
+                        mFatawowiAdapter.notifyDataSetChanged();
+                    }
+
                 }
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-                    //onRefresh();
+                    //TODO: later
+//                    Integer fatawaListPisition = getFataIndex(dataSnapshot.getKey());
+//                    if (fatawaListPisition != null)
+//                    {
+//                        fatawowi.remove(fatawaListPisition);
+//                        mFatawowiAdapter.notifyDataSetChanged();
+//                    }
                 }
 
                 @Override
@@ -329,8 +349,8 @@ public class FatawowiFragment extends Fragment implements CustomBaseQuickAdapter
             @Override
             public void run() {
                 detachedDatabaseListener();
-                LinkedList<FatawaData> fatawaList = new LinkedList<FatawaData>();
-                mFatawowiAdapter.setNewData(fatawaList);
+                fatawowi = new LinkedList<>();
+                mFatawowiAdapter.setNewData(fatawowi);
                 attacheDatabaseListner();
                 isErr = false;
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -375,6 +395,15 @@ public class FatawowiFragment extends Fragment implements CustomBaseQuickAdapter
                 Toast.makeText(getActivity(), "Ka dakatar da shigarwa", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    Integer getFataIndex(String key) {
+        for (int i = 0; i < fatawowi.size(); i++) {
+            if(fatawowi.get(i).getKey().equals(key)) {
+                return i;
+            }
+        }
+        return null;
     }
 
     /**
