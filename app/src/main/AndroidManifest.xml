@@ -30,6 +30,24 @@
             android:label="@string/title_activity_send_fatawa"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Slides.Gabatarwa" android:label="@string/app_name"></activity>
+
+        <service
+            android:name="com.aman.fatawowin.malamai.MessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        !-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+        See README(https://goo.gl/l4GJaQ) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/fatawa_notfn" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
     </application>
 
 </manifest>

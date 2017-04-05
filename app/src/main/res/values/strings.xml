@@ -1,6 +1,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!--BEGIN APPLICATION STRINGS-->
-    <string name="app_name">Guzirin Musulmi</string>
+    <string name="app_name">Fatawowin Malamai</string>
     <string name="matashiya">Matashiya</string>
     <string name="fatawowi">Fatawowi</string>
     <string name="zaure">Zaure</string>
@@ -15,12 +15,13 @@
     <string name="load_failed">Na kasa dakko ragowar</string>
     <string name="dakkowa">Ina dakkowa&#8230;</string>
     <string name="kasawa">Na ka sa dakkowa bayanai!</string>
-    <string name="gamawa">Na gama dakkowa bayanai</string>
+    <string name="gamawa">na gama dakkowa bayanai</string>
     <string name="malamaiLabel">Malamai: </string>
     <string name="rBayalabel">Bayani: </string>
     <string name="sign_in">Shigar da Bayanaka</string>
+    <string name="jawabinTaimako">So abinda nuke yi a Facebook ka kuma taimaka mana wajen yada wannan aiki. Da fatan Allah ya karba mana</string>
+    <string name="hakki">Hakkin Mallaka &#169; <b>Fatawowin Malamai</b> 2017</string>
     <!--END APPLICATION STRINGS-->
-
     <!--BEGIN Firebase Auth UI-->
     <!-- Common -->
     <string name="default_toolbar_title">@string/app_name</string>
@@ -94,11 +95,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_fatawa_detail">Cikakken Bayanin Fatawa</string>
-    <string name="sauraro">Saurari</string>
+    <string name="sauraro">Taimako</string>
     <string name="title_activity_send_fatawa">Tura Tambayarka</string>
     <string name="action_settings">Settings</string>
     <string name="amsa">Amsa</string>
     <string name="nema">Nemo</string>
+    <string name="submit">Tura</string>
+    <string name="send_to">Aika zuwa ga</string>
 
     <!--END Firebase Auth UI-->
 </resources>

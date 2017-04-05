@@ -11,6 +11,7 @@ import com.aman.fatawowin.malamai.R;
 import com.aman.fatawowin.malamai.util.SpannableStringUtils;
 import com.aman.fatawowin.malamai.util.Utils;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.cooltechworks.views.WhatsappViewCompat;
 
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
@@ -51,6 +52,7 @@ public class FatawowiAdapter extends CustomBaseQuickAdapter<FatawaData, BaseView
     protected void convert(BaseViewHolder helper, final FatawaData item) {
         //helper.addOnClickListener(R.id.tweetName);
         //helper.addOnClickListener(R.id.tweetText);
+        //TODO: Customization base if answered
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
         String date = format.format(item.getLokacinTambaya());
         String intro = item.getJawabinTambaya().substring(0, Math.min(item.getJawabinTambaya().length(), 60));
@@ -60,6 +62,8 @@ public class FatawowiAdapter extends CustomBaseQuickAdapter<FatawaData, BaseView
         ( (TextView)helper.getView(R.id.tweetText)).setMovementMethod(LinkMovementMethod.getInstance());
         helper.setText(R.id.tweetDate, date);
         //helper.linkify(R.id.tweetName);
+        //WhatsappViewCompat.applyFormatting((TextView)helper.getView(R.id.tweetName));
+        //WhatsappViewCompat.applyFormatting((TextView)helper.getView(R.id.tweetText));
     }
 
     @Override

@@ -26,6 +26,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements FatawowiFragment.OnFragmentInteractionListener,  ShiriFragment.OnFragmentInteractionListener, MatashiyaFragment.OnFragmentInteractionListener{
@@ -307,7 +309,19 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
 
                 //  Create a new boolean and preference and set it to true
                 boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
+                boolean isToSubcribed = getPrefs.getBoolean("subcribed", true);
 
+                if (isToSubcribed){
+                    FirebaseMessaging.getInstance().subscribeToTopic("fatawowi");
+                    //  Make a new preferences editor
+                    SharedPreferences.Editor e = getPrefs.edit();
+
+                    //  Edit preference to make it false because we don't want this to run again
+                    e.putBoolean("subcribed", false);
+
+                    //  Apply changes
+                    e.apply();
+                }
                 //  If the activity has never started before...
                 if (isFirstStart) {
 

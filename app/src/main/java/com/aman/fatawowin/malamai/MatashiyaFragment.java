@@ -14,13 +14,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aman.fatawowin.malamai.Entities.Matashiya;
+import com.cooltechworks.views.WhatsappViewCompat;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.ms.square.android.expandabletextview.ExpandableTextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -126,6 +126,7 @@ public class MatashiyaFragment extends Fragment {
             protected void populateViewHolder(MatashiyaViewHolder viewHolder, Matashiya model, int position) {
                 viewHolder.heading.setText(model.getHeading());
                 viewHolder.body.setText(model.getBody());
+
             }
 
         };
@@ -151,13 +152,13 @@ public class MatashiyaFragment extends Fragment {
 
     public static class MatashiyaViewHolder extends RecyclerView.ViewHolder {
         TextView heading;
-        ExpandableTextView body;
+        TextView body;
         public MatashiyaViewHolder(View itemView) {
             super(itemView);
             heading = (TextView) itemView.findViewById(R.id.heading);
             // sample code snippet to set the text content on the ExpandableTextView
-            body = (ExpandableTextView) itemView.findViewById(R.id.sample)
-                    .findViewById(R.id.expand_text_view);
+            body = (TextView) itemView.findViewById(R.id.bodyText);
+            WhatsappViewCompat.applyFormatting(body);
         }
 
     }

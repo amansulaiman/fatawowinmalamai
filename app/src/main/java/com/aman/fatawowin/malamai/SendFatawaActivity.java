@@ -10,7 +10,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.aman.fatawowin.malamai.R;
 
@@ -26,18 +28,19 @@ public class SendFatawaActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Spinner dropdown = (Spinner)findViewById(R.id.malamaiList);
-        String[] items = new String[]{"Malam Yahaya", "Malam Inuwa", "Mal. Daurawa"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        dropdown.setAdapter(adapter);
+//        Spinner dropdown = (Spinner)findViewById(R.id.malamaiList);
+//        String[] items = new String[]{"Malam Yahaya", "Malam Inuwa", "Mal. Daurawa"};
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+//        dropdown.setAdapter(adapter);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
 
-        if (id==android.R.id.home) {
-            finish();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -27,37 +27,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"/>
 
-        <com.ms.square.android.expandabletextview.ExpandableTextView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/expand_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            expandableTextView:maxCollapsedLines="4"
-            expandableTextView:animDuration="200">
 
-            <TextView
-                android:id="@+id/expandable_text"
+        <TextView
+                android:id="@+id/bodyText"
                 android:paddingLeft="@dimen/dp_10"
                 android:textSize="16sp"
                 android:textColor="#666666"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:paddingRight="@dimen/dp_10"
-                android:paddingBottom="@dimen/dp_10"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"/>
-            <ImageButton
-                android:id="@id/expand_collapse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:layout_gravity="end|bottom"
-                android:background="@android:color/transparent"/>
-
-        </com.ms.square.android.expandabletextview.ExpandableTextView>
+                android:paddingBottom="@dimen/dp_10" />
 
     </LinearLayout>
 </android.support.v7.widget.CardView>

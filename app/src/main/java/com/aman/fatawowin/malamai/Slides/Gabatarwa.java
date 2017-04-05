@@ -6,6 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.aman.fatawowin.malamai.R;
 import com.github.paolorotolo.appintro.AppIntro;
@@ -17,19 +20,19 @@ public class Gabatarwa extends AppIntro2 implements firstIntro.OnFragmentInterac
     Fragment secondFragment;
     Fragment thirdFragment;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         /*
         This is using Fragment
          */
-        firstFragment = new firstIntro();
-        secondFragment = new secondIntro();
-        thirdFragment = new thirdIntro();
-        addSlide(firstFragment);
-        addSlide(secondFragment);
-        addSlide(thirdFragment);
 
+        addSlide(new firstIntro());
+        addSlide(new secondIntro());
+        addSlide(new thirdIntro());
+        setCustomTransformer(new ZoomOutPageTransformer());
         // OPTIONAL METHODS
 
         // SHOW or HIDE the statusbar
@@ -41,12 +44,24 @@ public class Gabatarwa extends AppIntro2 implements firstIntro.OnFragmentInterac
         // Animations -- use only one of the below. Using both could cause errors.
        // setFadeAnimation(); // OR
         //setZoomAnimation(); // OR
-        setFlowAnimation();
+        //setFlowAnimation();
 
         // Turn vibration on and set intensity.
         // NOTE: you will probably need to ask VIBRATE permission in Manifest.
         setVibrate(true);
         setVibrateIntensity(30);
+
+        // Declare a new image view
+        ImageView imageView = new ImageView(this);
+
+        // Set background color
+        imageView.setBackgroundColor(Color.parseColor("#BA68C8"));
+
+        // Set layout params
+        imageView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+        // Bind the background to the intro
+        setBackgroundView(imageView);
 
     }
     @Override

@@ -1,14 +1,39 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.aman.fatawowin.malamai.ShiriFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/shirye"
-        android:textSize="60sp"/>
+        android:layout_height="wrap_content"
+        android:text="@string/jawabinTaimako"
+        style="@style/customHeading"
+        android:gravity="center"
+        android:padding="@dimen/activity_horizontal_margin"/>
 
-</FrameLayout>
+    <com.facebook.share.widget.LikeView
+        android:id="@+id/like_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    </com.facebook.share.widget.LikeView>
+
+    <ImageView
+        android:id="@+id/fatawowiImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/header_background"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hakki"
+        android:gravity="center"
+        style="@style/tweetText"
+        android:padding="@dimen/activity_horizontal_margin"/>
+</LinearLayout>

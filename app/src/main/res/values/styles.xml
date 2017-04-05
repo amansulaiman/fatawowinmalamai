@@ -36,6 +36,17 @@
         <item name="android:shadowRadius">1</item>
     </style>
 
+    <style name="customHeading">
+        <item name="android:textColor">@color/hard_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+        <!--<item name="android:textStyle">bold</item>-->
+        <item name="android:shadowColor">#1f000000</item>
+        <item name="android:shadowDx">0.5</item>
+        <item name="android:shadowDy">0.5</item>
+        <item name="android:shadowRadius">0.5</item>
+    </style>
+
     <style name="bg">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>

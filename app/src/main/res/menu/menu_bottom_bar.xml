@@ -10,7 +10,7 @@
         android:title="@string/fatawowi" />
     <item
         android:id="@+id/bottom_zaure"
-        android:icon="@drawable/shirye"
+        android:icon="@drawable/suwaye"
         android:title="@string/sauraro" />
     <!--<item-->
         <!--android:id="@+id/bottom_azkar"-->

@@ -7,8 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.aman.fatawowin.malamai.R;
+import com.bumptech.glide.Glide;
+import com.facebook.FacebookSdk;
+import com.facebook.share.widget.LikeView;
+
+import java.util.zip.Inflater;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +36,8 @@ public class ShiriFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private LikeView mLikeView;
+    private ImageView mImage;
 
     public ShiriFragment() {
         // Required empty public constructor
@@ -59,13 +68,25 @@ public class ShiriFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        FacebookSdk.sdkInitialize(getActivity().getBaseContext());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shiri, container, false);
+        View view = inflater.inflate(R.layout.fragment_shiri, container, false);
+        mLikeView = (LikeView) view.findViewById(R.id.like_view);
+        mLikeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Thank You", Toast.LENGTH_LONG).show();
+            }
+        });
+
+       mImage = (ImageView) view.findViewById(R.id.fatawowiImage);
+        mImage.setScaleType(ImageView.ScaleType.FIT_XY);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

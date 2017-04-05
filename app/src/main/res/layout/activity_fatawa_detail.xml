@@ -32,4 +32,13 @@
         app:srcCompat="@drawable/share"
         app:backgroundTint="@color/clickspan_color"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/suggest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/comment"
+        app:backgroundTint="@color/clickspan_color"/>
+
 </android.support.design.widget.CoordinatorLayout>
