@@ -76,13 +76,11 @@ public class ShiriFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shiri, container, false);
+
         mLikeView = (LikeView) view.findViewById(R.id.like_view);
-        mLikeView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Thank You", Toast.LENGTH_LONG).show();
-            }
-        });
+        mLikeView.setObjectIdAndType(
+                "https://www.facebook.com/FacebookDevelopers",
+                LikeView.ObjectType.PAGE);
 
        mImage = (ImageView) view.findViewById(R.id.fatawowiImage);
         mImage.setScaleType(ImageView.ScaleType.FIT_XY);

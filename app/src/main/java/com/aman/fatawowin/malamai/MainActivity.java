@@ -33,7 +33,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity implements FatawowiFragment.OnFragmentInteractionListener,  ShiriFragment.OnFragmentInteractionListener, MatashiyaFragment.OnFragmentInteractionListener{
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    public static  int currentItemSelected = 0;
+    public static  int currentItemSelected = 1;
     private Toolbar toolbar;
     private IconicTabBar iconicTabBar;
     private IconicTabBar.OnTabSelectedListener tabListener;
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements FatawowiFragment.
             }
 
             // Create a new Fragment to be placed in the activity layout
-            MatashiyaFragment firstFragment = new MatashiyaFragment();
+            FatawowiFragment firstFragment = new FatawowiFragment();
 
             // In case this activity was started with special instructions from an
             // Intent, pass the Intent's extras to the fragment as arguments
